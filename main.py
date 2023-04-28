@@ -62,8 +62,8 @@ class Post(Document):
     published = DateTimeField(default=datetime.datetime.now())
 
     @queryset_manager
-    def live_posts(clazz, queryset):
-        return queryset.filter(author='Mark Lutz')
+    def live_posts(self, queryset):
+        return queryset.filter(title='MongoDB: The second edition')
 
 # add new record using Post class
 author = Author(name='Kristina Chodorow')
@@ -78,6 +78,7 @@ print("New record title: ",post_5.title)
 post_5.title = 'MongoDB: The second edition'
 post_5.save()
 print("New title for record: ",post_5.title)
+print("The number of posts with name 'MongoDB: The second edition': ",len(Post.live_posts()))
 # trying to add record without required field
 #test_post = Post(content='some content', author='Sam')
 #test_post.save()
